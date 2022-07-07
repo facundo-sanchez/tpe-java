@@ -5,7 +5,7 @@ import java.util.List;
 
 import accion.AccionEjecutable;
 
-public class Nodo{
+public class Nodo implements Comparable<Nodo> {
 
 	private Object padre;
 	private Object dato;
@@ -62,7 +62,6 @@ public class Nodo{
 		this.izquierda = izquierda;
 	}
 
-
 	/**
 	 * @return the identificador
 	 */
@@ -79,49 +78,63 @@ public class Nodo{
 
 //	@Override
 	public Nodo insertarIzquierda(Comparable<Object> dato) {
-		if(this.getIzquierda() != null) {
+		if (this.getIzquierda() != null) {
 			return null;
 		}
-		Nodo n = new Nodo(this.getDato(),dato);
-		n.setIdentificador('I');
-		this.setIzquierda(n);
-		return n;
+		if (dato.compareTo(this.getDato()) != 0) {
+			Nodo n = new Nodo(this.getDato(), dato);
+			n.setIdentificador('I');
+			this.setIzquierda(n);
+			return n;
+		}
+		return null;
 	}
 
 //	@Override
 	public Nodo insertarDerecha(Comparable<Object> dato) {
-		if(this.getDerecha() != null) {
+		if (this.getDerecha() != null) {
 			return null;
 		}
-		Nodo n = new Nodo(this.getDato(),dato);
-		n.setIdentificador('D');
-		this.setDerecha(n);
-		return n;
+		
+		if(dato.compareTo(this.getDato()) != 0) {
+			Nodo n = new Nodo(this.getDato(), dato);
+			n.setIdentificador('D');
+			this.setDerecha(n);
+			return n;
+		}
+
+		return null;
 	}
 
 //	@Override
 	public List<Object> buscarElemento(AccionEjecutable accion) {
 		List<Object> result = new ArrayList<Object>();
-		result.add(this.getDato()+" "+this.getIdentificador());
-		if(this.getIzquierda() != null) {
+		result.add(this.getDato() + " " + this.getIdentificador());
+		if (this.getIzquierda() != null) {
+//			result.add(accion.ejecutarNodo(this));
 			result.addAll(this.getIzquierda().buscarElemento(accion));
 		}
-		if(this.getDerecha() != null) {
+		if (this.getDerecha() != null) {
+//			result.add(accion.ejecutarNodo(this));
 			result.addAll(this.getDerecha().buscarElemento(accion));
 		}
 		return result;
 	}
-	
+
 //	@Override
 	public int compare(Object o1, Object o2) {
-		return 0;
+		return 1;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "\nPadre: " + padre + ", Identificador: " + identificador + ", Dato: " + dato + ", Derecha= " + derecha  +" \nIzquierda= " + izquierda + "\n";
+		return "\nPadre: " + padre + ", Identificador: " + identificador + ", Dato: " + dato + ", Derecha= " + derecha
+				+ " \nIzquierda= " + izquierda + "\n";
 	}
 
+	@Override
+	public int compareTo(Nodo o) {
+		return 0;
+	}
 
 }

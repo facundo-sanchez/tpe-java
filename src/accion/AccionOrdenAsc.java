@@ -3,8 +3,8 @@ package accion;
 public class AccionOrdenAsc implements AccionEjecutable {
 
 	@Override
-	public Object ejecutarNodo(Object o) {
-		return o;
+	public String ejecutarNodo(Object o) {
+		return o.toString();
 	}
 
 }

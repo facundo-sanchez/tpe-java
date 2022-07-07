@@ -41,10 +41,11 @@ public class Arbol {
 		this.cantidad = cantidad;
 	}
 	
-	private boolean validarObjeto(Object e) {
+	private boolean validarObjeto(Nodo raiz, Comparable<Object> e) {
 		if(this.getCantidad() != 0) {
-			return this.getRaiz().getDato().getClass().equals(e.getClass());
-		}	
+			return raiz.getDato().getClass().equals(e.getClass());
+		}
+
 		return true;
 	}
 	
@@ -52,6 +53,9 @@ public class Arbol {
 		if(brazo == null) {
 			return false;
 		}
+//		if(this.getRaiz().compare(this.getRaiz().getDato(), brazo) == 0) {
+//			return false;
+//		}
 		return true;
 	}
 
@@ -67,7 +71,7 @@ public class Arbol {
 	}
 
 	public Nodo insertar(Comparable<Object> dato) {
-		if(validarObjeto(dato)) {
+		if(validarObjeto(this.getRaiz(), dato)) {
 			return insertar(this.getRaiz(), dato);
 		}
 		return null;

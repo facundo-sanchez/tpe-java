@@ -1,5 +1,5 @@
 package accion;
 
 public interface AccionEjecutable {
-	Object ejecutarNodo(Object o);
+	String ejecutarNodo(Object o);
 }

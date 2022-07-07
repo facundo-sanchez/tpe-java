@@ -6,7 +6,7 @@ import accion.AccionEjecutable;
 
 
 public abstract class Elemento{
-	
+	/*ACTUALMENTE NO ESTA EN USO*/
 	abstract Object getDato();
 	abstract Nodo getDerecha();
 	abstract void setDerecha(Nodo derecha);
