@@ -5,17 +5,17 @@ import java.util.List;
 import accion.AccionEjecutable;
 
 
-public interface Elemento{
+public abstract class Elemento{
 	
-	Elemento getDato();
-	Elemento getDerecha();
-	void setDerecha(Elemento derecha);
-	Elemento getIzquierda();
-	void setIzquierda(Elemento derecha);
-	int compare(Object o1, Object o2);
+	abstract Object getDato();
+	abstract Nodo getDerecha();
+	abstract void setDerecha(Nodo derecha);
+	abstract Nodo getIzquierda();
+	abstract void setIzquierda(Nodo derecha);
+	public abstract int compare(Object o1, Object o2);
 //	int compareMayor(Object o1, Object o2);
 //	int compareMenor(Object o1, Object o2);
-	Elemento insertarIzquierda(Elemento dato);
-	Elemento insertarDerecha(Elemento dato);
-	List<Object> buscarElemento(AccionEjecutable accion);
+	abstract Elemento insertarIzquierda(Elemento dato);
+	abstract Elemento insertarDerecha(Elemento dato);
+	abstract List<Object> buscarElemento(AccionEjecutable accion);
 }

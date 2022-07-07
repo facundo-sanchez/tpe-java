@@ -5,15 +5,15 @@ import java.util.List;
 
 import accion.AccionEjecutable;
 
-public class Nodo implements Elemento{
+public class Nodo{
 
-	private Elemento padre;
-	private Elemento dato;
+	private Object padre;
+	private Object dato;
 	private char identificador;
-	private Elemento derecha;
-	private Elemento izquierda;
+	private Nodo derecha;
+	private Nodo izquierda;
 
-	public Nodo(Elemento padre, Elemento dato) {
+	public Nodo(Object padre, Object dato) {
 		this.padre = padre;
 		this.dato = dato;
 		this.derecha = null;
@@ -23,42 +23,42 @@ public class Nodo implements Elemento{
 	/**
 	 * @return the dato
 	 */
-	public Elemento getDato() {
+	public Object getDato() {
 		return dato;
 	}
 
 	/**
 	 * @param dato the dato to set
 	 */
-	public void setDato(Elemento dato) {
+	public void setDato(Object dato) {
 		this.dato = dato;
 	}
 
 	/**
 	 * @return the derecha
 	 */
-	public Elemento getDerecha() {
+	public Nodo getDerecha() {
 		return derecha;
 	}
 
 	/**
 	 * @param derecha the derecha to set
 	 */
-	public void setDerecha(Elemento derecha) {
+	public void setDerecha(Nodo derecha) {
 		this.derecha = derecha;
 	}
 
 	/**
 	 * @return the izquierda
 	 */
-	public Elemento getIzquierda() {
+	public Nodo getIzquierda() {
 		return izquierda;
 	}
 
 	/**
 	 * @param izquierda the izquierda to set
 	 */
-	public void setIzquierda(Elemento izquierda) {
+	public void setIzquierda(Nodo izquierda) {
 		this.izquierda = izquierda;
 	}
 
@@ -77,8 +77,8 @@ public class Nodo implements Elemento{
 		this.identificador = identificador;
 	}
 
-	@Override
-	public Elemento insertarIzquierda(Elemento dato) {
+//	@Override
+	public Nodo insertarIzquierda(Comparable<Object> dato) {
 		if(this.getIzquierda() != null) {
 			return null;
 		}
@@ -88,8 +88,8 @@ public class Nodo implements Elemento{
 		return n;
 	}
 
-	@Override
-	public Elemento insertarDerecha(Elemento dato) {
+//	@Override
+	public Nodo insertarDerecha(Comparable<Object> dato) {
 		if(this.getDerecha() != null) {
 			return null;
 		}
@@ -99,7 +99,7 @@ public class Nodo implements Elemento{
 		return n;
 	}
 
-	@Override
+//	@Override
 	public List<Object> buscarElemento(AccionEjecutable accion) {
 		List<Object> result = new ArrayList<Object>();
 		result.add(this.getDato()+" "+this.getIdentificador());
@@ -112,7 +112,7 @@ public class Nodo implements Elemento{
 		return result;
 	}
 	
-	@Override
+//	@Override
 	public int compare(Object o1, Object o2) {
 		return 0;
 	}

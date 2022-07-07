@@ -16,7 +16,7 @@ public class Arbol {
 	/**
 	 * @return the raiz
 	 */
-	public Elemento getRaiz() {
+	public Nodo getRaiz() {
 		return raiz;
 	}
 
@@ -40,21 +40,22 @@ public class Arbol {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	
 	private boolean validarObjeto(Object e) {
-//		if(this.getCantidad() > 0) {
-//			return this.getRaiz().getClass().equals(e.getClass());
-//		}	
+		if(this.getCantidad() != 0) {
+			return this.getRaiz().getDato().getClass().equals(e.getClass());
+		}	
 		return true;
 	}
 	
-	private boolean validarBrazo(Elemento brazo) {
+	private boolean validarBrazo(Nodo brazo) {
 		if(brazo == null) {
 			return false;
 		}
 		return true;
 	}
 
-	private Elemento insertarRaiz(Elemento dato) {
+	private Nodo insertarRaiz(Comparable<Object> dato) {
 		if (this.getCantidad() != 0) {
 			return null;
 		}
@@ -65,18 +66,18 @@ public class Arbol {
 		return n;
 	}
 
-	public Elemento insertar(Elemento dato) {
+	public Nodo insertar(Comparable<Object> dato) {
 		if(validarObjeto(dato)) {
 			return insertar(this.getRaiz(), dato);
 		}
 		return null;
 	}
 
-	private Elemento insertar(Elemento padre, Elemento dato) {
+	private Nodo insertar(Nodo padre, Comparable<Object> dato) {
 		if (this.raiz == null) {
 			return insertarRaiz(dato);
 		}
-		if (dato.compare(padre.getDato(), dato) <= 0) {
+		if (dato.compareTo(padre.getDato()) <= 0) {
 			if (!validarBrazo(padre.getIzquierda())) {
 				return insertarIzquierda(padre, dato);
 			}
@@ -89,8 +90,8 @@ public class Arbol {
 		}
 	}
 
-	private Elemento insertarDerecha(Elemento padre, Elemento dato) {
-		Elemento n = padre.insertarDerecha(dato);
+	private Nodo insertarDerecha(Nodo padre, Comparable<Object> dato) {
+		Nodo n = padre.insertarDerecha(dato);
 		if(n != null) {
 			this.cantidad +=1;
 		}
@@ -98,8 +99,8 @@ public class Arbol {
 		return n;
 	}
 
-	private Elemento insertarIzquierda(Elemento padre, Elemento dato) {
-		Elemento n = padre.insertarIzquierda(dato);
+	private Nodo insertarIzquierda(Nodo padre, Comparable<Object> dato) {
+		Nodo n = padre.insertarIzquierda(dato);
 		if(n != null) {
 			this.cantidad +=1;
 		}
@@ -117,7 +118,7 @@ public class Arbol {
 				arbolDerecha.addAll(raiz.getDerecha().buscarElemento(null));
 			}
 		}
-		return "Arbol \nIzquierda= " + arbolIzquierda + "\nRaiz Arbol "+ raiz.getDato() +", \nDerecha= " + arbolDerecha + "] \nCantidad Total= "+cantidad;
+		return "Arbol \nIzquierda= " + arbolIzquierda + "\nRaiz Arbol "+ raiz.getDato()+" "+raiz.getIdentificador() +", \nDerecha= " + arbolDerecha + "] \nCantidad Total= "+cantidad;
 	}
 	
 //	private List<Object> recorrerArbol(Elemento data){

@@ -4,7 +4,7 @@ import java.util.List;
 
 import accion.AccionEjecutable;
 
-public class ElementoObject implements Elemento {
+public class ElementoObject extends Elemento {
 
 	public int compareMayor(Object o1, Object o2) {
 		return 0;
@@ -39,25 +39,25 @@ public class ElementoObject implements Elemento {
 	}
 
 	@Override
-	public Elemento getDerecha() {
+	public Nodo getDerecha() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setDerecha(Elemento derecha) {
+	public void setDerecha(Nodo derecha) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Elemento getIzquierda() {
+	public Nodo getIzquierda() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setIzquierda(Elemento derecha) {
+	public void setIzquierda(Nodo derecha) {
 		// TODO Auto-generated method stub
 		
 	};
