@@ -30,7 +30,7 @@ public class AccionMayor implements AccionEjecutable {
 		buscarNodoMayor(dato);
 	}
 
-	private <T> void buscarNodoMayor(Comparable dato) {
+	private void buscarNodoMayor(Comparable dato) {
 		if (dato != null) {
 			if (dato.compareTo(this.nodoMayor) > 0) {
 				this.setNodoMayor(dato);
