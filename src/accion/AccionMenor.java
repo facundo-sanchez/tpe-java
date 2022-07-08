@@ -30,7 +30,7 @@ public class AccionMenor implements AccionEjecutable {
 
 	}
 
-	private <T> void buscarNodoMenor(Comparable dato) {
+	private void buscarNodoMenor(Comparable dato) {
 		if(dato != null) {
 			if (dato.compareTo(this.nodoMenor) < 0) {
 				this.setNodoMenor(dato);
