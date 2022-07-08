@@ -1,5 +1,6 @@
 package accion;
 
 public interface AccionEjecutable {
-	String ejecutarNodo(Object o);
+
+	<T> void ejecutarNodo(Comparable dato);
 }

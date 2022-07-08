@@ -2,18 +2,25 @@ package arbol;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import accion.AccionEjecutable;
 
-public class Nodo implements Comparable<Nodo> {
+@SuppressWarnings("unchecked")
+public class Nodo<T>{
 
-	private Object padre;
-	private Object dato;
+	private Comparable<T> padre;
+	private Comparable<T> dato;
 	private char identificador;
-	private Nodo derecha;
-	private Nodo izquierda;
+	private Nodo<T> derecha;
+	private Nodo<T> izquierda;
 
-	public Nodo(Object padre, Object dato) {
+	public Nodo() {
+		this.padre = null;
+		this.dato = null;
+		this.derecha = null;
+		this.izquierda = null;
+	}
+
+	public Nodo(Comparable<T> padre, Comparable<T> dato) {
 		this.padre = padre;
 		this.dato = dato;
 		this.derecha = null;
@@ -21,44 +28,58 @@ public class Nodo implements Comparable<Nodo> {
 	}
 
 	/**
+	 * @param padre the padre to set
+	 */
+	public void setPadre(Comparable<T> padre) {
+		this.padre = padre;
+	}
+
+	/**
+	 * @return the padre
+	 */
+	public Object getPadre() {
+		return padre;
+	}
+
+	/**
 	 * @return the dato
 	 */
-	public Object getDato() {
+	public Comparable<T> getDato() {
 		return dato;
 	}
 
 	/**
 	 * @param dato the dato to set
 	 */
-	public void setDato(Object dato) {
+	public void setDato(Comparable<T> dato) {
 		this.dato = dato;
 	}
 
 	/**
 	 * @return the derecha
 	 */
-	public Nodo getDerecha() {
+	public Nodo<T> getDerecha() {
 		return derecha;
 	}
 
 	/**
 	 * @param derecha the derecha to set
 	 */
-	public void setDerecha(Nodo derecha) {
+	public void setDerecha(Nodo<T> derecha) {
 		this.derecha = derecha;
 	}
 
 	/**
 	 * @return the izquierda
 	 */
-	public Nodo getIzquierda() {
+	public Nodo<T> getIzquierda() {
 		return izquierda;
 	}
 
 	/**
 	 * @param izquierda the izquierda to set
 	 */
-	public void setIzquierda(Nodo izquierda) {
+	public void setIzquierda(Nodo<T> izquierda) {
 		this.izquierda = izquierda;
 	}
 
@@ -76,13 +97,12 @@ public class Nodo implements Comparable<Nodo> {
 		this.identificador = identificador;
 	}
 
-//	@Override
-	public Nodo insertarIzquierda(Comparable<Object> dato) {
+	public Nodo<T> insertarIzquierda(Comparable<T> dato) {
 		if (this.getIzquierda() != null) {
 			return null;
 		}
-		if (dato.compareTo(this.getDato()) != 0) {
-			Nodo n = new Nodo(this.getDato(), dato);
+		if (dato.compareTo((T) this.getDato()) != 0) {
+			Nodo<T> n = new Nodo<T>(this.getDato(), dato);
 			n.setIdentificador('I');
 			this.setIzquierda(n);
 			return n;
@@ -90,14 +110,13 @@ public class Nodo implements Comparable<Nodo> {
 		return null;
 	}
 
-//	@Override
-	public Nodo insertarDerecha(Comparable<Object> dato) {
+	public Nodo<T> insertarDerecha(Comparable<T> dato) {
 		if (this.getDerecha() != null) {
 			return null;
 		}
-		
-		if(dato.compareTo(this.getDato()) != 0) {
-			Nodo n = new Nodo(this.getDato(), dato);
+
+		if (dato.compareTo((T) this.getDato()) != 0) {
+			Nodo<T> n = new Nodo<T>(this.getDato(), dato);
 			n.setIdentificador('D');
 			this.setDerecha(n);
 			return n;
@@ -106,35 +125,23 @@ public class Nodo implements Comparable<Nodo> {
 		return null;
 	}
 
-//	@Override
-	public List<Object> buscarElemento(AccionEjecutable accion) {
-		List<Object> result = new ArrayList<Object>();
-		result.add(this.getDato() + " " + this.getIdentificador());
-		if (this.getIzquierda() != null) {
-//			result.add(accion.ejecutarNodo(this));
-			result.addAll(this.getIzquierda().buscarElemento(accion));
-		}
-		if (this.getDerecha() != null) {
-//			result.add(accion.ejecutarNodo(this));
-			result.addAll(this.getDerecha().buscarElemento(accion));
-		}
-		return result;
-	}
+	public void recorrerElemento(AccionEjecutable accion) {
 
-//	@Override
-	public int compare(Object o1, Object o2) {
-		return 1;
+		if (this.getIzquierda() != null) {
+			this.getIzquierda().recorrerElemento(accion);
+		}
+		
+		accion.ejecutarNodo(this.getDato());
+
+		if (this.getDerecha() != null) {
+			this.getDerecha().recorrerElemento(accion);
+		}
 	}
 
 	@Override
 	public String toString() {
 		return "\nPadre: " + padre + ", Identificador: " + identificador + ", Dato: " + dato + ", Derecha= " + derecha
 				+ " \nIzquierda= " + izquierda + "\n";
-	}
-
-	@Override
-	public int compareTo(Nodo o) {
-		return 0;
 	}
 
 }
